@@ -43,7 +43,7 @@ jobs:
       max-parallel: 40
       matrix:
         python-version: [3.7, 3.8]
-        dffml-version: [master, 0.3.7]
+        dffml-version: [master, 0.4.0]
 
     steps:
     - uses: actions/checkout@v2
