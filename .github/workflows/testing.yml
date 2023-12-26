@@ -1,74 +1,74 @@
-name: Tests
+NAME: TESTS
 
-on: [push, pull_request]
+ON: [PUSH, PULL_REQUEST]
 
-jobs:
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      max-parallel: 40
-      matrix:
-        check: [style]
-        python-version: [3.7]
+JOBS:
+  LINT:
+    RUNS-ON: UBUNTU-LATEST
+    STRATEGY:
+      FAIL-FAST: FALSE
+      MAX-PARALLEL: 40
+      MATRIX:
+        CHECK: [STYLE]
+        PYTHON-VERSION: [3.7]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Get pip cache
-      id: pip-cache
-      run: |
-        python -c "from pip._internal.locations import USER_CACHE_DIR; print('::set-output name=dir::' + USER_CACHE_DIR)"
-    - name: pip cache
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install dependencies
-      run: |
-        pip install -U black==19.10b0
-    - name: Run check
-      run: |
-        black --check .
+    STEPS:
+    - USES: ACTIONS/CHECKOUT@V2
+    - NAME: SET UP PYTHON ${{ MATRIX.PYTHON-VERSION }}
+      USES: ACTIONS/SETUP-PYTHON@V1
+      WITH:
+        PYTHON-VERSION: ${{ MATRIX.PYTHON-VERSION }}
+    - NAME: GET PIP CACHE
+      ID: PIP-CACHE
+      RUN: |
+        PYTHON -C "FROM PIP._INTERNAL.LOCATIONS IMPORT USER_CACHE_DIR; PRINT('::SET-OUTPUT NAME=DIR::' + USER_CACHE_DIR)"
+    - NAME: PIP CACHE
+      USES: ACTIONS/CACHE@V1
+      WITH:
+        PATH: ${{ STEPS.PIP-CACHE.OUTPUTS.DIR }}
+        KEY: ${{ RUNNER.OS }}-PIP-${{ HASHFILES('**/SETUP.PY') }}
+        RESTORE-KEYS: |
+          ${{ RUNNER.OS }}-PIP-
+    - NAME: INSTALL DEPENDENCIES
+      RUN: |
+        PIP INSTALL -U BLACK==19.10B0
+    - NAME: RUN CHECK
+      RUN: |
+        BLACK --CHECK .
 
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      max-parallel: 40
-      matrix:
-        python-version: [3.7, 3.8]
-        dffml-version: [master, 0.4.0]
+  TEST:
+    RUNS-ON: UBUNTU-LATEST
+    STRATEGY:
+      FAIL-FAST: FALSE
+      MAX-PARALLEL: 40
+      MATRIX:
+        PYTHON-VERSION: [3.7, 3.8]
+        DFFML-VERSION: [MASTER, 0.4.0]
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Get pip cache
-      id: pip-cache
-      run: |
-        python -c "from pip._internal.locations import USER_CACHE_DIR; print('::set-output name=dir::' + USER_CACHE_DIR)"
-    - name: pip cache
-      uses: actions/cache@v1
-      with:
-        path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/setup.py') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
-    - name: Install dependencies
-      run: |
-        set -x
-        pip install -U pip setuptools wheel
-        pip install -U "https://github.com/intel/dffml/archive/${{ matrix.dffml-version }}.zip#egg=dffml"
-        pip install -U .
-    - name: Test
-      run: |
-        set -x
-        python -m unittest discover -v
+    STEPS:
+    - USES: ACTIONS/CHECKOUT@V2
+    - NAME: SET UP PYTHON ${{ MATRIX.PYTHON-VERSION }}
+      USES: ACTIONS/SETUP-PYTHON@V1
+      WITH:
+        PYTHON-VERSION: ${{ MATRIX.PYTHON-VERSION }}
+    - NAME: GET PIP CACHE
+      ID: PIP-CACHE
+      RUN: |
+        PYTHON -C "FROM PIP._INTERNAL.LOCATIONS IMPORT USER_CACHE_DIR; PRINT('::SET-OUTPUT NAME=DIR::' + USER_CACHE_DIR)"
+    - NAME: PIP CACHE
+      USES: ACTIONS/CACHE@V1
+      WITH:
+        PATH: ${{ STEPS.PIP-CACHE.OUTPUTS.DIR }}
+        KEY: ${{ RUNNER.OS }}-PIP-${{ HASHFILES('**/SETUP.PY') }}
+        RESTORE-KEYS: |
+          ${{ RUNNER.OS }}-PIP-
+    - NAME: INSTALL DEPENDENCIES
+      RUN: |
+        SET -X
+        PIP INSTALL -U PIP SETUPTOOLS WHEEL
+        PIP INSTALL -U "HTTPS://GITHUB.COM/INTEL/DFFML/ARCHIVE/${{ MATRIX.DFFML-VERSION }}.ZIP#EGG=DFFML"
+        PIP INSTALL -U .
+    - NAME: TEST
+      RUN: |
+        SET -X
+        PYTHON -M UNITTEST DISCOVER -V
